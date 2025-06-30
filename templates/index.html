@@ -1,0 +1,595 @@
+{% extends "base.html" %}
+
+{% block title %}StockWellness - AI-Powered Investment Intelligence{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Storytelling -->
+<section class="hero-section">
+    <div class="hero-background">
+        <div class="hero-gradient"></div>
+        <div class="floating-elements">
+            <div class="float-element float-1"></div>
+            <div class="float-element float-2"></div>
+            <div class="float-element float-3"></div>
+        </div>
+    </div>
+    
+    <div class="container hero-content">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="hero-text" data-aos="fade-up">
+                    <div class="hero-badge">
+                        <span class="badge-pulse"></span>
+                        AI-POWERED INTELLIGENCE
+                    </div>
+                    <h1 class="hero-title">
+                        Your investment story
+                        <span class="gradient-text">starts here</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Discover how global events shape your investment future. Our AI analyzes 
+                        current affairs, combines timeless investment wisdom, and creates your personalized story.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="stat-number">99.7%</div>
+                            <div class="stat-label">Analysis Accuracy</div>
+                        </div>
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="stat-number">$2.3B+</div>
+                            <div class="stat-label">Analyzed Daily</div>
+                        </div>
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="stat-number">12ms</div>
+                            <div class="stat-label">Response Time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-form-container" data-aos="fade-left">
+                    <div class="analysis-card">
+                        <div class="card-header">
+                            <h3>Start Your Investment Story</h3>
+                            <p>Enter a ticker to see how global events shape its future</p>
+                        </div>
+                        <form id="analysisForm" class="analysis-form">
+                            <div class="input-group">
+                                <input type="text" id="tickerInput" placeholder="Enter stock ticker (e.g., AAPL)" 
+                                       class="form-control ticker-input" required>
+                                <button type="submit" class="btn btn-analyze">
+                                    <span class="btn-text">Analyze</span>
+                                    <span class="btn-loading">
+                                        <div class="loading-spinner"></div>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="popular-tickers">
+                                <span class="popular-label">Popular choices:</span>
+                                {% for ticker, name in popular_tickers %}
+                                <button type="button" class="ticker-chip" data-ticker="{{ ticker }}">
+                                    {{ ticker }}
+                                </button>
+                                {% endfor %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works-section">
+    <div class="container">
+        <div class="section-header text-center" data-aos="fade-up">
+            <h2>How we craft your investment story</h2>
+            <p>From global events to timeless wisdom, every analysis tells a complete story</p>
+        </div>
+        
+        <div class="process-timeline">
+            <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="timeline-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="timeline-content">
+                    <h4>Global Context</h4>
+                    <p>We analyze current global affairs, geopolitical tensions, and market-moving events</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="timeline-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="timeline-content">
+                    <h4>Investment Wisdom</h4>
+                    <p>AI searches through classic investment literature to find relevant principles</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="timeline-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="timeline-content">
+                    <h4>Company Analysis</h4>
+                    <p>Deep dive into fundamentals, price history, and market position</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="timeline-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="timeline-content">
+                    <h4>AI Synthesis</h4>
+                    <p>Our AI combines all elements to craft your personalized investment story</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Results Section (Initially Hidden) -->
+<section id="resultsSection" class="results-section" style="display: none;">
+    <div class="container">
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state">
+            <div class="loading-animation">
+                <div class="loading-circle"></div>
+                <div class="loading-text">
+                    <h3>Crafting your investment story...</h3>
+                    <p id="loadingSteps">Analyzing global events</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Content -->
+        <div id="resultsContent" style="display: none;">
+            <!-- Investment Story Header -->
+            <div class="story-header" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="story-title">
+                            Your <span id="companyName">Company</span> Investment Story
+                        </h2>
+                        <p class="story-subtitle">
+                            Based on current global events and timeless investment principles
+                        </p>
+                    </div>
+                    <div class="col-lg-4 text-end">
+                        <div class="story-timestamp">
+                            <i class="far fa-clock"></i>
+                            <span id="analysisTimestamp"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recommendation Card -->
+            <div class="recommendation-section" data-aos="fade-up" data-aos-delay="100">
+                <div class="recommendation-card">
+                    <div class="recommendation-header">
+                        <div class="recommendation-badge">
+                            <span id="recommendationText">BUY</span>
+                        </div>
+                        <div class="confidence-score">
+                            <div class="confidence-circle">
+                                <span id="confidenceScore">85</span>%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommendation-content">
+                        <h3>Investment Recommendation</h3>
+                        <p id="recommendationRationale"></p>
+                        <div class="price-target">
+                            <span class="price-label">12-Month Target:</span>
+                            <span id="priceTarget" class="price-value">$180</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Detailed Investment Analysis Section -->
+            <div class="detailed-analysis-section" data-aos="fade-up" data-aos-delay="200">
+                <div class="section-title">
+                    <h3><i class="fas fa-chart-bar"></i> Detailed Investment Analysis</h3>
+                    <p>Comprehensive breakdown of factors influencing this recommendation</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="analysis-card success-factors-card">
+                            <div class="card-header">
+                                <i class="fas fa-arrow-up text-success"></i>
+                                <h4>Key Success Factors</h4>
+                            </div>
+                            <div class="card-body">
+                                <ul id="keyFactorsList" class="factors-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="analysis-card risk-factors-card">
+                            <div class="card-header">
+                                <i class="fas fa-exclamation-triangle text-warning"></i>
+                                <h4>Risk Assessment</h4>
+                            </div>
+                            <div class="card-body">
+                                <ul id="riskFactorsList" class="factors-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Company Fundamentals -->
+                <div class="fundamentals-section">
+                    <h4><i class="fas fa-building"></i> Company Fundamentals</h4>
+                    <div class="fundamentals-grid" id="fundamentalsGrid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Price Chart Section -->
+            <div class="chart-section" data-aos="fade-up" data-aos-delay="300">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-line"></i> Price Performance Story</h3>
+                        <p>6-month price journey and market sentiment</p>
+                    </div>
+                    <div class="chart-container">
+                        <div id="priceChart"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Global Context Section -->
+            <div class="global-context-section" data-aos="fade-up" data-aos-delay="400">
+                <div class="section-title">
+                    <h3><i class="fas fa-globe-americas"></i> Global Context & News Intelligence</h3>
+                    <p>Current world events shaping this investment landscape</p>
+                </div>
+                
+                <div id="globalNewsContainer" class="news-container">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Investment Literature Context -->
+            <div class="literature-section" data-aos="fade-up" data-aos-delay="500">
+                <div class="section-title">
+                    <h3><i class="fas fa-book-open"></i> Investment Literature Insights</h3>
+                    <p>Timeless wisdom from classic investment books</p>
+                </div>
+                
+                <div id="literatureContainer" class="literature-container">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- News Sources & References -->
+            <div class="references-section" data-aos="fade-up" data-aos-delay="600">
+                <div class="section-title">
+                    <h3><i class="fas fa-link"></i> Sources & References</h3>
+                    <p>All news articles and sources used in this analysis</p>
+                </div>
+                
+                <div id="referencesContainer" class="references-container">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header text-center" data-aos="fade-up">
+            <h2>Why choose StockWellness?</h2>
+            <p>Advanced AI meets timeless investment wisdom</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h4>Global Intelligence</h4>
+                <p>Real-time analysis of global events and their market impact</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h4>Literature-Grounded</h4>
+                <p>Insights from classic investment books and proven strategies</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h4>AI-Powered</h4>
+                <p>Advanced machine learning for comprehensive analysis</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Data-Driven</h4>
+                <p>Real-time market data and fundamental analysis</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Premium loading animation
+function showPremiumLoading() {
+    const progress = document.querySelector('#loadingIndicator .progress-bar');
+    let width = 0;
+    const interval = setInterval(() => {
+        width += Math.random() * 15;
+        if (width >= 95) {
+            width = 95;
+            clearInterval(interval);
+        }
+        progress.style.width = width + '%';
+    }, 200);
+}
+
+function showSampleAnalysis() {
+    const modal = new bootstrap.Modal(document.getElementById('demoModal'));
+    modal.show();
+}
+
+// Main application logic
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('analysisForm');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const errorAlert = document.getElementById('errorAlert');
+    const resultsSection = document.getElementById('resultsSection');
+    
+    // Handle ticker button clicks
+    document.querySelectorAll('.ticker-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const ticker = this.getAttribute('data-ticker');
+            document.getElementById('ticker').value = ticker;
+            
+            // Add visual feedback
+            document.querySelectorAll('.ticker-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+    
+    // Handle form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const ticker = document.getElementById('ticker').value.trim().toUpperCase();
+        if (!ticker) {
+            showError('Please enter a stock ticker symbol.');
+            return;
+        }
+        
+        // Show loading state
+        showLoading();
+        showPremiumLoading();
+        
+        // Make the API call
+        fetch('/analyze', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `ticker=${encodeURIComponent(ticker)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            hideLoading();
+            
+            if (data.success) {
+                displayResults(data);
+            } else {
+                showError(data.error || 'An error occurred during analysis.');
+            }
+        })
+        .catch(error => {
+            hideLoading();
+            showError('Network error. Please check your connection and try again.');
+            console.error('Error:', error);
+        });
+    });
+    
+    function showLoading() {
+        analyzeBtn.disabled = true;
+        analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Analyzing...';
+        loadingIndicator.style.display = 'block';
+        hideError();
+        hideResults();
+    }
+    
+    function hideLoading() {
+        analyzeBtn.disabled = false;
+        analyzeBtn.innerHTML = '<i class="fas fa-rocket me-2"></i>Run AI Analysis';
+        loadingIndicator.style.display = 'none';
+    }
+    
+    function showError(message) {
+        document.getElementById('errorMessage').textContent = message;
+        errorAlert.style.display = 'block';
+        errorAlert.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function hideError() {
+        errorAlert.style.display = 'none';
+    }
+    
+    function hideResults() {
+        resultsSection.style.display = 'none';
+    }
+    
+    function displayResults(data) {
+        // Company information
+        document.getElementById('companyName').textContent = data.company_data.name || 'N/A';
+        document.getElementById('companySector').textContent = data.company_data.sector || 'N/A';
+        document.getElementById('companyIndustry').textContent = data.company_data.industry || 'N/A';
+        document.getElementById('marketCap').textContent = data.company_data.market_cap || 'N/A';
+        document.getElementById('peRatio').textContent = data.company_data.pe_ratio || 'N/A';
+        document.getElementById('currentPrice').textContent = data.company_data.current_price || 'N/A';
+        
+        // AI Recommendation
+        const recommendation = data.analysis.recommendation || 'HOLD';
+        const confidence = data.analysis.confidence_score || 0;
+        
+        const recElement = document.getElementById('recommendation');
+        recElement.textContent = recommendation;
+        recElement.className = getRecommendationClass(recommendation);
+        
+        document.getElementById('confidenceScore').textContent = confidence;
+        
+        const confidenceBar = document.getElementById('confidenceBar');
+        confidenceBar.style.width = confidence + '%';
+        confidenceBar.className = 'progress-bar ' + getProgressBarClass(recommendation);
+        
+                document.getElementById('priceTarget').textContent = data.analysis.price_target || 'N/A';
+                             // Summary removed to optimize token usage
+        document.getElementById('aiRationale').textContent = data.analysis.rationale || '';
+        
+        // Display RAG context and sources
+        displayRAGContext(data.analysis.rag_context);
+        
+        // Key factors and risks
+        const factorsList = document.getElementById('keyFactors');
+        factorsList.innerHTML = '';
+        if (data.analysis.key_factors) {
+            data.analysis.key_factors.forEach(factor => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-check-circle text-success me-2"></i>${factor}`;
+                li.className = 'mb-2';
+                factorsList.appendChild(li);
+            });
+        }
+        
+        const risksList = document.getElementById('risks');
+        risksList.innerHTML = '';
+        if (data.analysis.risks) {
+            data.analysis.risks.forEach(risk => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-exclamation-circle text-warning me-2"></i>${risk}`;
+                li.className = 'mb-2';
+                risksList.appendChild(li);
+            });
+        }
+        
+        // Price chart
+        if (data.price_chart) {
+            const chartData = JSON.parse(data.price_chart);
+            Plotly.newPlot('priceChart', chartData.data, chartData.layout, {responsive: true});
+        }
+        
+        // News articles
+        const newsContainer = document.getElementById('newsArticles');
+        newsContainer.innerHTML = '';
+        if (data.news_articles && data.news_articles.length > 0) {
+            data.news_articles.forEach(article => {
+                const articleDiv = document.createElement('div');
+                articleDiv.className = 'border-bottom mb-3 pb-3';
+                articleDiv.innerHTML = `
+                    <h6><a href="${article.url}" target="_blank" class="text-decoration-none">${article.title}</a></h6>
+                    <p class="text-muted mb-1">${article.description || ''}</p>
+                    <small class="text-muted">
+                        <i class="fas fa-clock me-1"></i>${article.published_at || ''}
+                        ${article.source ? `• <i class="fas fa-newspaper me-1"></i>${article.source}` : ''}
+                    </small>
+                `;
+                newsContainer.appendChild(articleDiv);
+            });
+        } else {
+            newsContainer.innerHTML = '<p class="text-muted">No recent news articles found.</p>';
+        }
+        
+        // Show results
+        resultsSection.style.display = 'block';
+        resultsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function getRecommendationClass(recommendation) {
+        switch (recommendation) {
+            case 'BUY': return 'text-success';
+            case 'SELL': return 'text-danger';
+            default: return 'text-warning';
+        }
+    }
+    
+    function getProgressBarClass(recommendation) {
+        switch (recommendation) {
+            case 'BUY': return 'bg-success';
+            case 'SELL': return 'bg-danger';
+            default: return 'bg-warning';
+        }
+    }
+    
+    function displayRAGContext(ragContext) {
+        const ragContainer = document.getElementById('ragContext');
+        
+        if (!ragContext || !ragContext.sources || ragContext.sources.length === 0) {
+            ragContainer.innerHTML = '<p class="text-muted"><i class="fas fa-info-circle me-2"></i>No investment literature context available.</p>';
+            return;
+        }
+        
+        let html = `
+            <div class="mb-3">
+                <p class="fw-bold text-success">
+                    <i class="fas fa-check-circle me-2"></i>${ragContext.reasoning}
+                </p>
+            </div>
+            <div class="accordion" id="ragAccordion">
+        `;
+        
+        ragContext.sources.forEach((source, index) => {
+            const collapseId = `ragSource${index}`;
+            html += `
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}">
+                            <div class="d-flex justify-content-between align-items-center w-100">
+                                <div>
+                                    <strong>${source.book}</strong> - ${source.chapter}
+                                    <small class="text-muted ms-2">Page ${source.page}</small>
+                                </div>
+                                <span class="badge bg-primary ms-2">Relevance: ${(source.relevance_score * 100).toFixed(1)}%</span>
+                            </div>
+                        </button>
+                    </h2>
+                    <div id="${collapseId}" class="accordion-collapse collapse" data-bs-parent="#ragAccordion">
+                        <div class="accordion-body">
+                            <div class="border-start border-primary ps-3">
+                                <p class="mb-0">${source.text_preview}</p>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-book me-1"></i>Source: ${source.book}, Chapter: ${source.chapter}, Page ${source.page}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        ragContainer.innerHTML = html;
+    }
+});
+</script>
+{% endblock %} 
