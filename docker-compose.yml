@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  stockwellness:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN_PORT=5000
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - NEWS_API_KEY=${NEWS_API_KEY}
+      - SECRET_KEY=${SECRET_KEY:-default-secret-key-change-in-production}
+    volumes:
+      # Mount cache directory for persistence
+      - ./cache:/app/cache
+      # Mount .env file if it exists (optional)
+      - ./.env:/app/.env:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s 

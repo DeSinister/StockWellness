@@ -235,4 +235,8 @@ if __name__ == '__main__':
         logger.warning("Some features may not work properly. Please check your .env file.")
     
     # Run the app in production mode
-    app.run(debug=False, host='0.0.0.0', port=8080) 
+    port = int(os.getenv('FLASK_RUN_PORT', 8080))
+    host = os.getenv('FLASK_RUN_HOST', '0.0.0.0')
+    debug = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    
+    app.run(debug=debug, host=host, port=port) 
