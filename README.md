@@ -41,6 +41,75 @@ An end-to-end Flask web application that uses Retrieval-Augmented Generation (RA
 - **Responsive Design**: Works on desktop and mobile
 - **Real-time Updates**: Live data integration
 
+## 🐳 Docker Deployment
+
+### Quick Start with Docker
+
+The easiest way to run StockWellness is using Docker. We provide multiple options:
+
+#### Option 1: Using the Management Script (Recommended)
+```bash
+# Make the script executable
+chmod +x docker-run.sh
+
+# Build and run with docker-compose
+./docker-run.sh compose
+
+# Or run directly
+./docker-run.sh run
+
+# View logs
+./docker-run.sh logs
+
+# Stop the application
+./docker-run.sh stop
+```
+
+#### Option 2: Using Docker Compose
+```bash
+# Build and start the application
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop the application
+docker-compose down
+```
+
+#### Option 3: Using Docker directly
+```bash
+# Build the image
+docker build -t stockwellness:latest .
+
+# Run the container
+docker run -d \
+  --name stockwellness \
+  -p 5000:5000 \
+  --env-file .env \
+  -v $(pwd)/cache:/app/cache \
+  stockwellness:latest
+```
+
+### Environment Variables for Docker
+
+Create a `.env` file in the project root:
+```env
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+NEWS_API_KEY=your_news_api_key_here
+SECRET_KEY=your_secret_key_here
+```
+
+### Docker Features
+
+- **Port 5000**: Application runs on port 5000 (exposed)
+- **Health Checks**: Built-in health monitoring
+- **Volume Persistence**: Cache data persists between container restarts
+- **Security**: Runs as non-root user
+- **Optimized Build**: Multi-stage build with layer caching
+
+Once running, access the application at: http://localhost:5000
+
 ## 🎯 Usage
 
 ### Basic Analysis
