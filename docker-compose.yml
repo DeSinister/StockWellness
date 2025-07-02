@@ -7,11 +7,14 @@ services:
       - "5000:5000"
     environment:
       - FLASK_ENV=production
-      - FLASK_RUN_HOST=0.0.0.0
-      - FLASK_RUN_PORT=5000
+      - FLASK_DEBUG=False
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - NEWS_API_KEY=${NEWS_API_KEY}
       - SECRET_KEY=${SECRET_KEY:-default-secret-key-change-in-production}
+      # Production optimizations
+      - WORKERS=4
+      - TIMEOUT=120
+      - KEEP_ALIVE=2
     volumes:
       # Mount cache directory for persistence
       - ./cache:/app/cache
@@ -23,4 +26,13 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s 
+      start_period: 40s
+    # Resource limits for production
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '2.0'
+        reservations:
+          memory: 1G
+          cpus: '1.0' 

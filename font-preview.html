@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockWellness Font Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #f8fafc;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-showcase {
+            display: grid;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .font-option {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .font-option:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        }
+        
+        .font-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .font-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-type {
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .demo-content h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-content p {
+            font-size: 1rem;
+            color: #718096;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .demo-content .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #48bb78;
+            margin: 1rem 0;
+        }
+        
+        .demo-content .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .metric-card {
+            background: #f7fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-source { font-family: 'Source Sans Pro', sans-serif; }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+        .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-ibm { font-family: 'IBM Plex Sans', sans-serif; }
+        .font-work { font-family: 'Work Sans', sans-serif; }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .pros, .cons {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .pros {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+        }
+        
+        .cons {
+            background: #fffaf0;
+            border-left: 4px solid #ed8936;
+        }
+        
+        .pros h4, .cons h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pros h4 { color: #22543d; }
+        .cons h4 { color: #9c4221; }
+        
+        .pros ul, .cons ul {
+            font-size: 0.8rem;
+            padding-left: 1rem;
+        }
+        
+        .pros li { color: #276749; }
+        .cons li { color: #9c4221; }
+        
+        .recommendation {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1rem;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>StockWellness Font Options</h1>
+            <p>Choose the perfect typography for your investment platform</p>
+        </div>
+        
+        <div class="font-showcase">
+            <!-- Current: Inter -->
+            <div class="font-option">
+                <div class="font-header">
+                    <h2 class="font-name">Inter (Current)</h2>
+                    <span class="font-type">Modern Sans</span>
+                </div>
+                <div class="demo-content font-inter">
+                    <h1>Your AAPL Investment Story</h1>
+                    <h2>Investment Recommendation: BUY</h2>
+                    <h3>Comprehensive analysis based on global events</h3>
+                    <p>Apple Inc. shows strong fundamentals with increasing revenue growth and market expansion. The company's strategic positioning in emerging markets presents significant opportunities for long-term investors.</p>
+                    <div class="price">Target Price: $185.50</div>
+                    <div class="metrics">
+                        <div class="metric-card">
+                            <div class="metric-label">P/E Ratio</div>
+                            <div class="metric-value">28.5</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Revenue Growth</div>
+                            <div class="metric-value">12.3%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Market Cap</div>
+                            <div class="metric-value">$2.8T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Pros</h4>
+                        <ul>
+                            <li>Exceptional readability</li>
+                            <li>Perfect for data/numbers</li>
+                            <li>Modern, professional</li>
+                            <li>Great web performance</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>⚠️ Considerations</h4>
+                        <ul>
+                            <li>Very common choice</li>
+                            <li>Less distinctive</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="recommendation">⭐ CURRENT CHOICE - Already excellent!</div>
+            </div>
+
+            <!-- Poppins -->
+            <div class="font-option">
+                <div class="font-header">
+                    <h2 class="font-name">Poppins</h2>
+                    <span class="font-type">Geometric Sans</span>
+                </div>
+                <div class="demo-content font-poppins">
+                    <h1>Your AAPL Investment Story</h1>
+                    <h2>Investment Recommendation: BUY</h2>
+                    <h3>Comprehensive analysis based on global events</h3>
+                    <p>Apple Inc. shows strong fundamentals with increasing revenue growth and market expansion. The company's strategic positioning in emerging markets presents significant opportunities for long-term investors.</p>
+                    <div class="price">Target Price: $185.50</div>
+                    <div class="metrics">
+                        <div class="metric-card">
+                            <div class="metric-label">P/E Ratio</div>
+                            <div class="metric-value">28.5</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Revenue Growth</div>
+                            <div class="metric-value">12.3%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Market Cap</div>
+                            <div class="metric-value">$2.8T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Pros</h4>
+                        <ul>
+                            <li>Friendly, approachable</li>
+                            <li>Great for headers</li>
+                            <li>Very popular, trusted</li>
+                            <li>Excellent weight variety</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>⚠️ Considerations</h4>
+                        <ul>
+                            <li>Might feel too casual</li>
+                            <li>Overused in some contexts</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="recommendation">🔥 POPULAR CHOICE - Modern & friendly</div>
+            </div>
+
+            <!-- Source Sans Pro -->
+            <div class="font-option">
+                <div class="font-header">
+                    <h2 class="font-name">Source Sans Pro</h2>
+                    <span class="font-type">Professional</span>
+                </div>
+                <div class="demo-content font-source">
+                    <h1>Your AAPL Investment Story</h1>
+                    <h2>Investment Recommendation: BUY</h2>
+                    <h3>Comprehensive analysis based on global events</h3>
+                    <p>Apple Inc. shows strong fundamentals with increasing revenue growth and market expansion. The company's strategic positioning in emerging markets presents significant opportunities for long-term investors.</p>
+                    <div class="price">Target Price: $185.50</div>
+                    <div class="metrics">
+                        <div class="metric-card">
+                            <div class="metric-label">P/E Ratio</div>
+                            <div class="metric-value">28.5</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Revenue Growth</div>
+                            <div class="metric-value">12.3%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Market Cap</div>
+                            <div class="metric-value">$2.8T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Pros</h4>
+                        <ul>
+                            <li>Adobe's professional font</li>
+                            <li>Great for financial content</li>
+                            <li>Excellent readability</li>
+                            <li>Corporate-trusted</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>⚠️ Considerations</h4>
+                        <ul>
+                            <li>Less modern feeling</li>
+                            <li>Can feel generic</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="recommendation">💼 CORPORATE CHOICE - Trusted & professional</div>
+            </div>
+
+            <!-- Space Grotesk -->
+            <div class="font-option">
+                <div class="font-header">
+                    <h2 class="font-name">Space Grotesk</h2>
+                    <span class="font-type">Modern Tech</span>
+                </div>
+                <div class="demo-content font-space">
+                    <h1>Your AAPL Investment Story</h1>
+                    <h2>Investment Recommendation: BUY</h2>
+                    <h3>Comprehensive analysis based on global events</h3>
+                    <p>Apple Inc. shows strong fundamentals with increasing revenue growth and market expansion. The company's strategic positioning in emerging markets presents significant opportunities for long-term investors.</p>
+                    <div class="price">Target Price: $185.50</div>
+                    <div class="metrics">
+                        <div class="metric-card">
+                            <div class="metric-label">P/E Ratio</div>
+                            <div class="metric-value">28.5</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Revenue Growth</div>
+                            <div class="metric-value">12.3%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Market Cap</div>
+                            <div class="metric-value">$2.8T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Pros</h4>
+                        <ul>
+                            <li>Cutting-edge, tech-forward</li>
+                            <li>Distinctive personality</li>
+                            <li>Great for fintech</li>
+                            <li>Modern geometric style</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>⚠️ Considerations</h4>
+                        <ul>
+                            <li>Might feel too trendy</li>
+                            <li>Less tested in finance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="recommendation">🚀 TECH CHOICE - Bold & distinctive</div>
+            </div>
+
+            <!-- Plus Jakarta Sans -->
+            <div class="font-option">
+                <div class="font-header">
+                    <h2 class="font-name">Plus Jakarta Sans</h2>
+                    <span class="font-type">Premium Modern</span>
+                </div>
+                <div class="demo-content font-jakarta">
+                    <h1>Your AAPL Investment Story</h1>
+                    <h2>Investment Recommendation: BUY</h2>
+                    <h3>Comprehensive analysis based on global events</h3>
+                    <p>Apple Inc. shows strong fundamentals with increasing revenue growth and market expansion. The company's strategic positioning in emerging markets presents significant opportunities for long-term investors.</p>
+                    <div class="price">Target Price: $185.50</div>
+                    <div class="metrics">
+                        <div class="metric-card">
+                            <div class="metric-label">P/E Ratio</div>
+                            <div class="metric-value">28.5</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Revenue Growth</div>
+                            <div class="metric-value">12.3%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Market Cap</div>
+                            <div class="metric-value">$2.8T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Pros</h4>
+                        <ul>
+                            <li>Premium, sophisticated</li>
+                            <li>Excellent for UI/UX</li>
+                            <li>Great weight range</li>
+                            <li>Modern but approachable</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>⚠️ Considerations</h4>
+                        <ul>
+                            <li>Newer, less established</li>
+                            <li>Slightly less readable</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="recommendation">✨ PREMIUM CHOICE - Sophisticated & modern</div>
+            </div>
+
+            <!-- IBM Plex Sans -->
+            <div class="font-option">
+                <div class="font-header">
+                    <h2 class="font-name">IBM Plex Sans</h2>
+                    <span class="font-type">Corporate Tech</span>
+                </div>
+                <div class="demo-content font-ibm">
+                    <h1>Your AAPL Investment Story</h1>
+                    <h2>Investment Recommendation: BUY</h2>
+                    <h3>Comprehensive analysis based on global events</h3>
+                    <p>Apple Inc. shows strong fundamentals with increasing revenue growth and market expansion. The company's strategic positioning in emerging markets presents significant opportunities for long-term investors.</p>
+                    <div class="price">Target Price: $185.50</div>
+                    <div class="metrics">
+                        <div class="metric-card">
+                            <div class="metric-label">P/E Ratio</div>
+                            <div class="metric-value">28.5</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Revenue Growth</div>
+                            <div class="metric-value">12.3%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Market Cap</div>
+                            <div class="metric-value">$2.8T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Pros</h4>
+                        <ul>
+                            <li>Enterprise-grade quality</li>
+                            <li>Excellent for data</li>
+                            <li>Professional credibility</li>
+                            <li>Great performance</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>⚠️ Considerations</h4>
+                        <ul>
+                            <li>Can feel corporate</li>
+                            <li>Less warm/friendly</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="recommendation">🏢 ENTERPRISE CHOICE - Trusted by IBM</div>
+            </div>
+
+            <!-- Work Sans -->
+            <div class="font-option">
+                <div class="font-header">
+                    <h2 class="font-name">Work Sans</h2>
+                    <span class="font-type">Balanced</span>
+                </div>
+                <div class="demo-content font-work">
+                    <h1>Your AAPL Investment Story</h1>
+                    <h2>Investment Recommendation: BUY</h2>
+                    <h3>Comprehensive analysis based on global events</h3>
+                    <p>Apple Inc. shows strong fundamentals with increasing revenue growth and market expansion. The company's strategic positioning in emerging markets presents significant opportunities for long-term investors.</p>
+                    <div class="price">Target Price: $185.50</div>
+                    <div class="metrics">
+                        <div class="metric-card">
+                            <div class="metric-label">P/E Ratio</div>
+                            <div class="metric-value">28.5</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Revenue Growth</div>
+                            <div class="metric-value">12.3%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Market Cap</div>
+                            <div class="metric-value">$2.8T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Pros</h4>
+                        <ul>
+                            <li>Perfect balance</li>
+                            <li>Great readability</li>
+                            <li>Professional yet friendly</li>
+                            <li>Versatile weights</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>⚠️ Considerations</h4>
+                        <ul>
+                            <li>Fairly common</li>
+                            <li>Less distinctive</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="recommendation">⚖️ BALANCED CHOICE - Best of both worlds</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: white; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+            <h2 style="font-family: 'Inter', sans-serif; color: #1a202c; margin-bottom: 1rem;">My Top Recommendations</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                <div style="padding: 1rem; background: #667eea; color: white; border-radius: 8px;">
+                    <h3>🏆 Keep Inter</h3>
+                    <p style="font-size: 0.9rem;">You already have an excellent choice. Inter is perfect for financial platforms.</p>
+                </div>
+                <div style="padding: 1rem; background: #48bb78; color: white; border-radius: 8px;">
+                    <h3>🚀 Try Space Grotesk</h3>
+                    <p style="font-size: 0.9rem;">For a more distinctive, tech-forward look that stands out.</p>
+                </div>
+                <div style="padding: 1rem; background: #ed8936; color: white; border-radius: 8px;">
+                    <h3>✨ Plus Jakarta Sans</h3>
+                    <p style="font-size: 0.9rem;">For a premium, sophisticated feel with excellent UI performance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

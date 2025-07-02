@@ -233,7 +233,7 @@ Ground your recommendation in proven investment methodologies. Reference specifi
             
             response = self.client.messages.create(
                 model="claude-3-5-sonnet-20241022",  # Will update to claude-4 when available
-                max_tokens=500,
+                max_tokens=850,  # Balanced limit for complete responses while managing costs
                 temperature=0.3,
                 system="You are a professional stock analyst providing concise investment recommendations grounded in established investment literature and principles.",
                 messages=[
@@ -242,35 +242,79 @@ Ground your recommendation in proven investment methodologies. Reference specifi
             )
             
             # Handle response content properly
-            if hasattr(response.content[0], 'text'):
-                analysis_text = response.content[0].text.strip()
-            else:
-                analysis_text = str(response.content[0]).strip()
+            try:
+                # The response.content is a list of content blocks
+                content_block = response.content[0]
+                # Safely extract text content
+                analysis_text = getattr(content_block, 'text', str(content_block)).strip()
+            except (IndexError, AttributeError) as e:
+                logger.error(f"Error accessing response content: {e}")
+                analysis_text = str(response.content).strip()
             
             # Try to parse JSON response
             try:
-                logger.info(f"Raw LLM response: {analysis_text[:200]}...")
+                logger.info(f"Raw LLM response length: {len(analysis_text)}")
+                logger.info(f"Raw LLM response start: {analysis_text[:200]}...")
                 
-                # Extract and clean JSON from the response
+                # Extract JSON from the response - be more careful with boundaries
                 json_start = analysis_text.find('{')
-                json_end = analysis_text.rfind('}') + 1
+                json_end = analysis_text.rfind('}')
                 
-                if json_start != -1 and json_end != -1:
+                # Handle cases where JSON might be truncated
+                if json_start != -1 and json_end != -1 and json_end > json_start:
+                    json_end += 1  # Include the closing brace
+                elif json_start != -1 and json_end == -1:
+                    # JSON starts but doesn't end - likely truncated, try to add closing brace
+                    logger.warning("JSON appears truncated - attempting to complete it")
+                    potential_json = analysis_text[json_start:].strip()
+                    if not potential_json.endswith('}'):
+                        potential_json += '}'
+                    json_end = len(analysis_text)
+                    analysis_text = analysis_text[:json_start] + potential_json
+                
+                if json_start != -1 and json_end > json_start:
                     json_str = analysis_text[json_start:json_end]
-                    logger.info(f"Extracted JSON: {json_str[:200]}...")
+                    logger.info(f"Extracted JSON length: {len(json_str)}")
+                    logger.info(f"Extracted JSON start: {json_str[:100]}...")
+                    logger.info(f"Extracted JSON end: ...{json_str[-100:]}")
                     
-                    # Clean common JSON formatting issues
-                    json_str = json_str.replace('\n', ' ').replace('\r', ' ')
-                    json_str = json_str.replace('\\', '\\\\')  # Escape backslashes
-                    
-                    # Try to fix common quote issues
-                    import re
-                    # Fix unescaped quotes in strings (basic attempt)
-                    json_str = re.sub(r'(?<!\\)"(?=[^,}\]]*[,}\]])', '\\"', json_str)
-                    
-                    analysis = json.loads(json_str)
+                    # Try parsing the JSON as-is first
+                    try:
+                        analysis = json.loads(json_str)
+                        logger.info("JSON parsed successfully on first attempt")
+                    except json.JSONDecodeError as first_error:
+                        logger.warning(f"First JSON parse attempt failed: {first_error}")
+                        logger.warning(f"Error at position: {first_error.pos if hasattr(first_error, 'pos') else 'unknown'}")
+                        
+                        # If JSON is clearly present but malformed, try to fix common issues
+                        if json_str.strip():
+                            import re
+                            # Fix common issues: unescaped quotes in strings, control characters
+                            cleaned_json = json_str
+                            
+                            # Remove control characters but preserve regular whitespace
+                            cleaned_json = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]', '', cleaned_json)
+                            
+                            # Try to fix unescaped newlines in JSON strings
+                            cleaned_json = re.sub(r'(?<!\\)\n(?=\s*["\]}])', ' ', cleaned_json)
+                            
+                            logger.info(f"Cleaned JSON length: {len(cleaned_json)}")
+                            logger.info(f"Cleaned JSON preview: {cleaned_json[:200]}...")
+                            
+                            try:
+                                analysis = json.loads(cleaned_json)
+                                logger.info("JSON parsed successfully after cleaning")
+                            except json.JSONDecodeError as second_error:
+                                logger.error(f"Second JSON parse attempt also failed: {second_error}")
+                                logger.error(f"Cleaned JSON: {cleaned_json}")
+                                raise second_error
+                        else:
+                            logger.error("Extracted JSON string is empty")
+                            raise ValueError("Extracted JSON is empty")
                 else:
-                    raise ValueError("No JSON found in response")
+                    logger.error(f"JSON boundaries not found. Start: {json_start}, End: {json_end}")
+                    logger.error(f"Response content: {analysis_text}")
+                    raise ValueError("No valid JSON found in response")
                 
                 # Validate required fields
                 required_fields = ['recommendation', 'confidence_score', 'rationale']
@@ -282,13 +326,9 @@ Ground your recommendation in proven investment methodologies. Reference specifi
                 if analysis['recommendation'] not in ['BUY', 'HOLD', 'SELL']:
                     analysis['recommendation'] = 'HOLD'
                 
-                # Ensure confidence score is valid
-                try:
-                    confidence = float(analysis['confidence_score'])
-                    if confidence < 0 or confidence > 100:
-                        analysis['confidence_score'] = 50
-                except (ValueError, TypeError):
-                    analysis['confidence_score'] = 50
+                # Remove confidence score if present (not needed in UI)
+                if 'confidence_score' in analysis:
+                    del analysis['confidence_score']
                 
                 # Add RAG context to response
                 analysis['rag_context'] = {
@@ -330,7 +370,6 @@ Ground your recommendation in proven investment methodologies. Reference specifi
                 # Fallback analysis
                 return {
                     'recommendation': 'HOLD',
-                    'confidence_score': 50,
                     'rationale': rationale_text,
                     'key_factors': ['Unable to parse detailed factors - please retry analysis'],
                     'risks': ['JSON parsing failed - please retry analysis'],
@@ -346,7 +385,6 @@ Ground your recommendation in proven investment methodologies. Reference specifi
             logger.error(f"Error getting LLM analysis: {str(e)}")
             return {
                 'recommendation': 'HOLD',
-                'confidence_score': 0,
                 'rationale': f'Analysis failed due to error: {str(e)}',
                 'key_factors': [],
                 'risks': [],

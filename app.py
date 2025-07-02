@@ -96,7 +96,9 @@ def analyze_stock():
         # 4. Use both global context + book wisdom in analysis
         
         # Create price chart
+        logger.info(f"About to create price chart for {company_data['name']}")
         price_chart = create_price_chart(price_data, company_data['name'])
+        logger.info(f"Price chart created: {bool(price_chart)}, length: {len(price_chart) if price_chart else 0}")
         
         # Get enhanced LLM analysis with global affairs + investment literature
         logger.info(f"Getting enhanced RAG analysis for {ticker}")
@@ -126,7 +128,7 @@ def analyze_stock():
             'price_data': price_data,
             'news_articles': analysis.get('rag_context', {}).get('global_news', [])[:5],  # Global affairs news from RAG
             'analysis': analysis,
-            'price_chart': price_chart,
+            'chart_data': price_chart,  # Fixed: was 'price_chart', now 'chart_data'
             'generated_at': datetime.now().isoformat()
         }
         
@@ -143,12 +145,17 @@ def analyze_stock():
 def create_price_chart(price_data, company_name):
     """Create a Plotly chart for stock prices"""
     try:
-        if not price_data:
+        logger.info(f"Creating chart for {company_name} with {len(price_data) if price_data else 0} data points")
+        
+        if not price_data or len(price_data) == 0:
+            logger.warning("No price data available for chart")
             return None
         
         dates = [entry['date'] for entry in price_data]
         closes = [entry['close'] for entry in price_data]
         volumes = [entry['volume'] for entry in price_data]
+        
+        logger.info(f"Chart data: {len(dates)} dates, price range: ${min(closes):.2f} - ${max(closes):.2f}")
         
         # Create candlestick chart
         fig = go.Figure()
@@ -176,6 +183,7 @@ def create_price_chart(price_data, company_name):
         
         # Convert to JSON for frontend
         graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+        logger.info("Chart JSON created successfully")
         return graphJSON
         
     except Exception as e:
