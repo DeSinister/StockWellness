@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.ticker-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const ticker = this.getAttribute('data-ticker');
-            document.getElementById('ticker').value = ticker;
+            document.getElementById('tickerInput').value = ticker;
             
             // Add visual feedback
             document.querySelectorAll('.ticker-btn').forEach(b => b.classList.remove('active'));
@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const ticker = document.getElementById('ticker').value.trim().toUpperCase();
+        const ticker = document.getElementById('tickerInput').value.trim().toUpperCase();
         if (!ticker) {
             showError('Please enter a stock ticker symbol.');
             return;
@@ -505,8 +505,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Price chart
-        if (data.price_chart) {
-            const chartData = JSON.parse(data.price_chart);
+        if (data.chart_data) {
+            const chartData = JSON.parse(data.chart_data);
             Plotly.newPlot('priceChart', chartData.data, chartData.layout, {responsive: true});
         }
         

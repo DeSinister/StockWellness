@@ -10,8 +10,10 @@ from dotenv import load_dotenv
 # Import our utility modules
 from utils.stock_api import StockAPI
 from utils.news_api import NewsAPI
-from utils.llm_client import LLMClient
 from utils.cache import SimpleCache
+
+# Import LLMClient - use Lambda API for RAG
+from utils.llm_client_lambda_api import LambdaAPILLMClient as LLMClient
 
 # Load environment variables
 load_dotenv()

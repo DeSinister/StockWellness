@@ -20,8 +20,8 @@ ENV FLASK_ENV=production
 ENV FLASK_APP=app.py
 ENV PYTHONUNBUFFERED=1
 
-# Expose the port Flask runs on
-EXPOSE 5000
+# Expose the port Flask runs on (Render uses PORT env var)
+EXPOSE $PORT
 
-# Run with Gunicorn for production
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--timeout", "120", "app:app"] 
+# Run with Gunicorn for production (Render-optimized)
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 300 --max-requests 1000 --max-requests-jitter 100 app:app"] 
