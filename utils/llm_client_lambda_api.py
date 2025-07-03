@@ -148,7 +148,13 @@ Reference the investment principles above when relevant.
                 messages=[{"role": "user", "content": prompt}]
             )
             
-            response_text = message.content[0].text
+            # Handle different content types in Anthropic API response
+            response_text = ""
+            for content_block in message.content:
+                if hasattr(content_block, 'text'):
+                    response_text += content_block.text
+                elif hasattr(content_block, 'content'):
+                    response_text += str(content_block.content)
             
             # Parse JSON response
             try:

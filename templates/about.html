@@ -1,0 +1,1060 @@
+{% extends "base.html" %}
+
+{% block title %}About - StockWellness{% endblock %}
+
+{% block content %}
+<!-- About Creator Section - NOW FIRST -->
+<section class="dark-section creator-section">
+    <!-- Floating Elements -->
+    <div class="floating-icons"><div class="float-icon float-icon-1"><i class="fas fa-laptop-code"></i></div>  <!-- 💻 Coding/Dev -->
+    <div class="float-icon float-icon-2"><i class="fas fa-robot"></i></div>        <!-- 🤖 AI/ML -->
+    <div class="float-icon float-icon-3"><i class="fas fa-chart-line"></i></div>   <!-- 📊 Stock data/trends -->
+    <div class="float-icon float-icon-4"><i class="fas fa-rocket"></i></div>       <!-- 🚀 Growth/prediction -->
+    <div class="float-icon float-icon-5"><i class="fas fa-star"></i></div>         <!-- ⭐ Performance/highlights -->
+    <div class="float-icon float-icon-6"><i class="fas fa-lightbulb"></i></div>    <!-- 💡 Insights/innovation -->
+    
+    </div>
+    
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="text-white mb-3 hero-title-animated" style="text-shadow: 0 3px 6px rgba(0,0,0,0.4); font-weight: 800;">Meet the Creator</h2>
+            <div class="profile-section">
+                <i class="fas fa-user-circle fa-4x text-white mb-3" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3);"></i>
+                <h3 class="text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-weight: 700;">Nishq Poorav Desai</h3>
+                <p class="lead text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-weight: 600;">Data Scientist & AI/ML Engineer</p>
+                <p class="text-white mx-auto" style="max-width: 600px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); opacity: 0.95; font-weight: 500; line-height: 1.7;">
+                    Master’s graduate with 4+ years of hands-on experience in data science, spanning machine learning,
+predictive modeling, and analytics. Published in top-tier venues (eg. WACV) with 100+ citations. Committed to delivering scalable, data-informed product and strategy solutions.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Job Market Highlight -->
+        <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="opportunity-highlight-box">
+                <div class="opportunity-content">
+                    <div class="rocket-animation">
+                        <i class="fas fa-rocket fa-3x text-white mb-3"></i>
+                    </div>
+                    <h4 class="text-white mb-3" style="font-size: 1.8rem; font-weight: 800;"> Open to Opportunities!</h4>
+                    <p class="text-white mb-4" style="font-size: 1.1rem; font-weight: 500; line-height: 1.6;">
+                        Actively seeking full-time <strong>Data Scientist</strong>, <strong>Applied Scientist</strong> and <strong>AI/ML Engineer</strong> roles.  If you like what you see in StockWellness, let's connect! 
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Links -->
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-md-2 col-4 mb-3">
+                <a href="mailto:n.desai@queensu.ca" class="contact-btn">
+                    <i class="fas fa-envelope fa-2x mb-2"></i>
+                    <p>Email</p>
+                </a>
+            </div>
+            <div class="col-md-2 col-4 mb-3">
+                <a href="https://www.linkedin.com/in/nishq/" target="_blank" class="contact-btn">
+                    <i class="fab fa-linkedin fa-2x mb-2"></i>
+                    <p>LinkedIn</p>
+                </a>
+            </div>
+            <div class="col-md-2 col-4 mb-3">
+                <a href="https://github.com/DeSinister" target="_blank" class="contact-btn">
+                    <i class="fab fa-github fa-2x mb-2"></i>
+                    <p>GitHub</p>
+                </a>
+            </div>
+            <div class="col-md-2 col-4 mb-3">
+                <a href="https://scholar.google.com/citations?user=m2uTpYIAAAAJ&hl=en" target="_blank" class="contact-btn">
+                    <i class="fas fa-graduation-cap fa-2x mb-2"></i>
+                    <p>Scholar</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Architecture Diagram Section - PLACEHOLDER -->
+<section class="light-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="gradient-text mb-3">System Architecture</h2>
+            <p class="lead text-muted">Intelligent flow from ticker input to investment decision</p>
+        </div>
+        
+        <div class="architecture-diagram" data-aos="fade-up" data-aos-delay="100">
+            <!-- Architecture Image -->
+            <div class="diagram-container mb-4">
+                <img src="{{ url_for('static', filename='images/stock_wellness_architecture.png') }}" 
+                     alt="StockWellness System Architecture" 
+                     class="img-fluid border rounded shadow"
+                     style="max-width: 100%; height: auto;">
+            </div>
+            
+            <!-- Download Links -->
+            <div class="text-center">
+                <p class="text-muted mt-3">
+                    <small>Complete system architecture showing: User Input → Data Collection → Global Affairs Analysis → RAG Search → AI Decision</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="dark-section">
+    <div class="container">
+    <!-- Step by Step Flow -->
+    <div class="workflow-container" data-aos="fade-up" data-aos-delay="100">
+        
+        <!-- Step 1 -->
+        <div class="workflow-step">
+            <div class="step-icon-circle step-1">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="step-content">
+                <h4>Data Collection</h4>
+                <p>When you enter a ticker symbol, the system instantly fetches comprehensive company data and 6 months of historical price data from Yahoo Finance API.</p>
+            </div>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="workflow-step">
+            <div class="step-icon-circle step-2">
+                <i class="fas fa-globe"></i>
+            </div>
+            <div class="step-content">
+                <h4>Global Affairs Analysis</h4>
+                <p>AI agent analyzes current global affairs - wars, competition, trade policies, geopolitics - and summarizes how these events could specifically impact your stock.</p>
+            </div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="workflow-step">
+            <div class="step-icon-circle step-3">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <div class="step-content">
+                <h4>Classic Investment Wisdom</h4>
+                <p>AWS Lambda RAG system with sentence transformers searches through legendary investment books to find relevant principles that apply to your situation, complete with exact page, chapter, and book references.</p>
+            </div>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="workflow-step">
+            <div class="step-icon-circle step-4">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="step-content">
+                <h4>AI Investment Decision</h4>
+                <p>Final AI agent synthesizes ALL collected data - market fundamentals, global events, and investment literature - to generate a BUY/SELL/HOLD recommendation with target price and detailed reasoning.</p>
+            </div>
+        </div>
+        
+        <!-- Step 5 -->
+        <div class="workflow-step">
+            <div class="step-icon-circle step-5">
+                <i class="fas fa-link"></i>
+            </div>
+            <div class="step-content">
+                <h4>Complete Transparency</h4>
+                <p>Every recommendation includes full references - news articles, book excerpts with relevance scores, and reasoning chains - so you can verify and dive deeper into any source.</p>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+</section>
+
+<!-- Technical Excellence Section -->
+<section class="light-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="gradient-text mb-3">Technical Excellence</h2>
+            <p class="lead text-muted">Built with cutting-edge AI and cloud infrastructure</p>
+        </div>
+        
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-md-4 mb-4">
+                <div class="tech-highlight">
+                    <i class="fab fa-aws fa-3x text-primary mb-3"></i>
+                    <h5>AWS Lambda + S3</h5>
+                    <p class="text-muted">Serverless semantic search with precomputed embeddings for sub-30 second responses</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="tech-highlight">
+                    <i class="fas fa-vector-square fa-3x text-success mb-3"></i>
+                    <h5>Sentence Transformers</h5>
+                    <p class="text-muted">State-of-the-art semantic search through investment literature with relevance scoring</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="tech-highlight">
+                    <i class="fas fa-brain fa-3x text-warning mb-3"></i>
+                    <h5>Claude AI</h5>
+                    <p class="text-muted">Advanced reasoning capabilities for nuanced financial analysis and decision making</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Investment Books Section -->
+<section class="dark-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="text-white mb-3">Investment Literature</h2>
+            <p class="lead text-light">Drawing wisdom from legendary investors and timeless principles</p>
+        </div>
+        
+        <div class="books-grid" data-aos="fade-up" data-aos-delay="100">
+            <div class="book-item-dark">📖 The Intelligent Investor</div>
+            <div class="book-item-dark">📈 A Random Walk Down Wall Street</div>
+            <div class="book-item-dark">💼 Common Stocks and Uncommon Profits</div>
+            <div class="book-item-dark">🎯 One Up On Wall Street</div>
+            <div class="book-item-dark">📚 The Little Book of Common Sense Investing</div>
+            <div class="book-item-dark">🔍 Stock Investing 101</div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Section Backgrounds */
+.dark-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 100%);
+    padding: 5rem 0;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 20px 40px rgba(102, 126, 234, 0.2),
+        0 10px 20px rgba(118, 75, 162, 0.1);
+}
+
+.dark-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.15) 50%, rgba(240, 147, 251, 0.1) 100%);
+    backdrop-filter: blur(10px);
+}
+
+.dark-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    animation: floatParticles 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatParticles {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-100px) rotate(360deg); }
+}
+
+.dark-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Contact Button Styling - Enhanced with animations */
+
+.contact-btn i {
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.contact-btn p {
+    color: white;
+    margin: 0;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Enhanced Opportunity Highlight Box */
+.opportunity-highlight-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    padding: 3rem;
+    margin: 2rem auto;
+    max-width: 700px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* .opportunity-highlight-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+} */
+
+.opportunity-highlight-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 30px 50px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.opportunity-content {
+    position: relative;
+    z-index: 2;
+}
+
+.rocket-animation {
+    animation: rocketBounce 2s ease-in-out infinite;
+}
+
+@keyframes rocketBounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.cta-text {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Floating Icons Animation */
+.floating-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.float-icon {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.2;
+    animation: floatAround 15s ease-in-out infinite;
+}
+
+.float-icon-1 {
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 12s;
+}
+
+.float-icon-2 {
+    top: 20%;
+    right: 15%;
+    animation-delay: 2s;
+    animation-duration: 14s;
+}
+
+.float-icon-3 {
+    bottom: 30%;
+    left: 5%;
+    animation-delay: 4s;
+    animation-duration: 16s;
+}
+
+.float-icon-4 {
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 6s;
+    animation-duration: 13s;
+}
+
+.float-icon-5 {
+    top: 50%;
+    left: 20%;
+    animation-delay: 8s;
+    animation-duration: 15s;
+}
+
+.float-icon-6 {
+    top: 70%;
+    right: 25%;
+    animation-delay: 10s;
+    animation-duration: 17s;
+}
+
+@keyframes floatAround {
+    0%, 100% { 
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.2;
+    }
+    25% { 
+        transform: translateY(-20px) translateX(10px) rotate(90deg);
+        opacity: 0.4;
+    }
+    50% { 
+        transform: translateY(-15px) translateX(-10px) rotate(180deg);
+        opacity: 0.3;
+    }
+    75% { 
+        transform: translateY(-25px) translateX(15px) rotate(270deg);
+        opacity: 0.5;
+    }
+}
+
+/* Animated Title */
+.hero-title-animated {
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 0 3px 6px rgba(0,0,0,0.4), 0 0 30px rgba(255,255,255,0.1);
+    }
+    to {
+        text-shadow: 0 3px 6px rgba(0,0,0,0.4), 0 0 40px rgba(255,255,255,0.3);
+    }
+}
+
+/* Enhanced Contact Buttons */
+.contact-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: white;
+    display: block;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: transform 0.5s;
+    transform: translateX(-100%) translateY(-100%);
+}
+
+.contact-btn:hover::before {
+    transform: translateX(100%) translateY(100%);
+}
+
+.contact-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    color: white;
+    text-decoration: none;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Profile Section Enhancement */
+.profile-section {
+    position: relative;
+    z-index: 2;
+}
+
+.light-section {
+    background: #f8f9fa;
+    padding: 5rem 0;
+}
+
+/* Architecture Diagram */
+.architecture-diagram {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.arch-flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.arch-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 150px;
+}
+
+.arch-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.arch-icon {
+    margin-bottom: 0.5rem;
+}
+
+.arch-item h6 {
+    margin-bottom: 0.3rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.arch-item p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Workflow Timeline Styles */
+.workflow-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.workflow-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #667eea, #764ba2);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.workflow-step {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 4rem;
+    z-index: 2;
+}
+
+.workflow-step:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.workflow-step:nth-child(even) .step-content {
+    text-align: right;
+    padding-right: 2rem;
+    padding-left: 0;
+}
+
+.workflow-step:nth-child(odd) .step-content {
+    text-align: left;
+    padding-left: 2rem;
+    padding-right: 0;
+}
+
+.step-icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    position: relative;
+    z-index: 3;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.step-icon-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.step-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+.step-2 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.step-3 { background: linear-gradient(135deg, #fa709a, #fee140); }
+.step-4 { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+.step-5 { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+
+.step-content {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 0 1rem;
+    transition: all 0.3s ease;
+}
+
+.step-content:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.step-content h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.step-content p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .workflow-container {
+        padding: 0 1rem;
+    }
+    
+    .workflow-container::before {
+        left: 40px;
+        transform: none;
+    }
+    
+    .workflow-step {
+        flex-direction: row !important;
+        margin-bottom: 3rem;
+    }
+    
+    .workflow-step:nth-child(even) .step-content,
+    .workflow-step:nth-child(odd) .step-content {
+        text-align: left;
+        padding-left: 1.5rem;
+        padding-right: 1rem;
+    }
+    
+    .step-icon-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-left: 25px;
+    }
+    
+    .step-content {
+        margin-left: 2rem;
+        margin-right: 0;
+        padding: 1.5rem;
+    }
+    
+    .step-content h4 {
+        font-size: 1.25rem;
+    }
+}
+
+.arch-arrow {
+    font-size: 1.5rem;
+}
+
+/* Grid Layout */
+.arch-item:nth-child(1) { grid-column: 1; grid-row: 1; }
+.arch-item:nth-child(3) { grid-column: 3; grid-row: 1; }
+.arch-item:nth-child(5) { grid-column: 1; grid-row: 2; }
+.arch-item:nth-child(7) { grid-column: 3; grid-row: 2; }
+.arch-item:nth-child(9) { grid-column: 5; grid-row: 2; }
+.arch-item:nth-child(11) { grid-column: 1; grid-row: 3; }
+.arch-item:nth-child(13) { grid-column: 3; grid-row: 3; }
+.arch-item:nth-child(15) { grid-column: 5; grid-row: 3; }
+.arch-item:nth-child(17) { grid-column: 3; grid-row: 4; }
+
+.arch-arrow:nth-child(2) { grid-column: 2; grid-row: 1; }
+.arch-arrow:nth-child(4) { grid-column: 2; grid-row: 2; }
+.arch-arrow:nth-child(6) { grid-column: 2; grid-row: 2; }
+.arch-arrow:nth-child(8) { grid-column: 4; grid-row: 2; }
+.arch-arrow:nth-child(10) { grid-column: 4; grid-row: 2; }
+.arch-arrow:nth-child(12) { grid-column: 2; grid-row: 3; }
+.arch-arrow:nth-child(14) { grid-column: 4; grid-row: 3; }
+.arch-arrow:nth-child(16) { grid-column: 3; grid-row: 3; }
+
+/* Workflow Steps */
+.workflow-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.workflow-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    /* border-left: 3px solid rgba(255,255,255,0.2); */
+    position: relative;
+}
+
+.workflow-step:last-child {
+    border-left: none;
+}
+
+.step-number {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 2rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.step-content {
+    flex: 1;
+    padding-top: 0.5rem;
+}
+
+.step-content h4 {
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.step-content p {
+    color: #bdc3c7;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Tech Highlights */
+.tech-highlight {
+    text-align: center;
+    padding: 2rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.tech-highlight:hover {
+    transform: translateY(-10px);
+}
+
+.tech-highlight h5 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.tech-highlight p {
+    color: #6c757d;
+    line-height: 1.5;
+}
+
+/* Profile Section */
+.profile-section {
+    padding: 2rem 0;
+}
+
+.profile-section h3 {
+    /* margin-bottom: 0.5rem; */
+    color: #333;
+}
+
+.profile-section .lead {
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* Opportunity Highlight */
+.opportunity-highlight {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.opportunity-highlight h4 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+/* Contact Buttons */
+.contact-btn {
+    display: block;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.contact-btn:hover {
+    color: #667eea;
+    text-decoration: none;
+    transform: translateY(-5px);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.contact-btn i {
+    color: #667eea;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover i {
+    transform: scale(1.1);
+}
+
+.contact-btn p {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Architecture Placeholder */
+.architecture-placeholder {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.placeholder-content {
+    text-align: center;
+    padding: 3rem;
+    border: 2px dashed #dee2e6;
+    border-radius: 15px;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+/* Profile Section */
+.profile-section {
+    padding: 2rem 0;
+}
+
+.profile-section h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.profile-section .lead {
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* Opportunity Highlight */
+.opportunity-highlight {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.opportunity-highlight h4 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+/* Contact Buttons */
+.contact-btn {
+    display: block;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.contact-btn:hover {
+    color: #667eea;
+    text-decoration: none;
+    transform: translateY(-5px);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.contact-btn i {
+    color: #667eea;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover i {
+    transform: scale(1.1);
+}
+
+.contact-btn p {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Dark Section Elements */
+.opportunity-highlight-dark {
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+}
+
+.contact-btn-dark {
+    display: block;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.contact-btn-dark:hover {
+    color: #667eea;
+    text-decoration: none;
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.1);
+}
+
+.contact-btn-dark i {
+    color: #667eea;
+    transition: all 0.3s ease;
+}
+
+.contact-btn-dark:hover i {
+    transform: scale(1.1);
+}
+
+.contact-btn-dark p {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Books Grid */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.book-item {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+    color: #495057;
+    transition: all 0.3s ease;
+    border-left: 4px solid #667eea;
+}
+
+.book-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+}
+
+.book-item-dark {
+    background: rgba(255,255,255,0.1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+    color: #ecf0f1;
+    transition: all 0.3s ease;
+    border-left: 4px solid #667eea;
+    backdrop-filter: blur(5px);
+}
+
+.book-item-dark:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.2);
+}
+
+/* Color Utilities */
+.text-orange { color: #fd7e14 !important; }
+.text-purple { color: #6f42c1 !important; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dark-section, .light-section {
+        padding: 3rem 0;
+    }
+    
+    .workflow-step {
+        flex-direction: column;
+        text-align: center;
+        border-left: none;
+        border-top: 3px solid rgba(255,255,255,0.2);
+        padding: 2rem 1rem;
+    }
+    
+    .step-number {
+        margin: 0 auto 1rem auto;
+    }
+    
+    .books-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .arch-flow {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1rem;
+    }
+    
+    .arch-item:nth-child(odd) { grid-column: 1; }
+    .arch-arrow { display: none; }
+    
+    .arch-item {
+        max-width: 200px;
+        margin: 0 auto;
+    }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Initialize AOS animations
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
+{% endblock %} 

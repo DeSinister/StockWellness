@@ -192,6 +192,15 @@ def create_price_chart(price_data, company_name):
         logger.error(f"Error creating price chart: {str(e)}")
         return None
 
+@app.route('/about')
+def about():
+    """About page with project architecture and creator info"""
+    try:
+        return render_template('about.html')
+    except Exception as e:
+        logger.error(f"Error rendering about page: {str(e)}")
+        return f"Error rendering about page: {str(e)}", 500
+
 @app.route('/health')
 def health_check():
     """Health check endpoint"""
