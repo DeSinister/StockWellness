@@ -35,7 +35,11 @@ class NewsAPI:
                 elif topic.lower() == 'trading co-operations':
                     query_terms.extend(['trade agreement', 'tariffs', 'supply chain', 'US China trade', 'OPEC', 'Federal Reserve'])
             
-            query = '"geopolitical tension" OR "international crisis" OR "diplomatic relations" OR "war" OR "conflict" OR "military action" OR "armed forces" OR "trade disruption" OR "supply chain" OR "tariffs" OR "trade agreement" OR "economic sanctions"'
+            query = query = (
+                "geopolitical tension OR international crisis OR diplomatic relations OR "
+                "war OR conflict OR military action OR armed forces OR "
+                "trade disruption OR supply chain OR tariffs OR trade agreement OR economic sanctions"
+            )
             # ' OR '.join(query_terms[:12])  # Include more specific terms
             
             params = {
