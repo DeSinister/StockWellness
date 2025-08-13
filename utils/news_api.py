@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 class NewsAPI:
     def __init__(self):
         self.api_key = os.getenv('NEWS_API_KEY')
-        self.base_url = "https://newsapi.org/v2/everything"
+        self.base_url = "https://newsapi.org/v2/top-headlines" # "https://newsapi.org/v2/everything"
         
         if not self.api_key:
             logger.warning("NEWS_API_KEY not found in environment variables")
@@ -35,16 +35,17 @@ class NewsAPI:
                 elif topic.lower() == 'trading co-operations':
                     query_terms.extend(['trade agreement', 'tariffs', 'supply chain', 'US China trade', 'OPEC', 'Federal Reserve'])
             
-            query = ' OR '.join(query_terms[:12])  # Include more specific terms
+            query = '"geopolitical tension" OR "international crisis" OR "diplomatic relations" OR "war" OR "conflict" OR "military action" OR "armed forces" OR "trade disruption" OR "supply chain" OR "tariffs" OR "trade agreement" OR "economic sanctions"'
+            # ' OR '.join(query_terms[:12])  # Include more specific terms
             
             params = {
                 'q': query,
                 'apiKey': self.api_key,
-                'sortBy': 'publishedAt',
+                # 'sortBy': 'publishedAt',
                 'language': 'en',
                 'pageSize': max_articles,
-                'from': from_date.strftime('%Y-%m-%d'),
-                'to': to_date.strftime('%Y-%m-%d')
+                # 'from': from_date.strftime('%Y-%m-%d'),
+                # 'to': to_date.strftime('%Y-%m-%d')
             }
             
             logger.info(f"NewsAPI request: {self.base_url} with params: {params}")
