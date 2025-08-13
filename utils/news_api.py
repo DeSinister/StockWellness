@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 class NewsAPI:
     def __init__(self):
-        self.api_key = os.getenv('NEWS_API_KEY')  # Ensure this environment variable is set
+        self.api_key = os.getenv('NEW_NEWS_API_KEY')  # Ensure this environment variable is set
         self.base_url = "https://newsdata.io/api/1/news"
 
         if not self.api_key:
