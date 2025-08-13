@@ -51,7 +51,8 @@ class NewsAPI:
             logger.info(f"NewsAPI request: {self.base_url} with params: {params}")
             headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                              "(KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+                              "(KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+                "x-api-key": os.getenv('NEWS_API_KEY')
             }
             response = requests.get(self.base_url, params=params, headers=headers, timeout=10)
             response.raise_for_status()
