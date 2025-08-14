@@ -32,7 +32,7 @@ class NewsAPI:
                     "removeduplicate": 1,
                     # "from_date": from_date,
                     # "to_date": to_date,
-                    "full_content": 1
+                    # "full_content": 1
             }
 
             logger.info(f"NewsData.io request: {self.base_url} with params: {params}")
