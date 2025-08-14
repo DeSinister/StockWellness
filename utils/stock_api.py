@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class StockAPI:
     def __init__(self):
-        self.api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+        self.api_key = os.environ.get("STOCK_API_KEY")
         self.base_url = "https://www.alphavantage.co/query"
         if not self.api_key:
             logger.error("ALPHAVANTAGE_API_KEY not set in environment variables")
