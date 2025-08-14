@@ -35,7 +35,15 @@ class NewsAPI:
                 elif topic.lower() == 'trading co-operations':
                     query_terms.extend(['trade agreement', 'tariffs', 'supply chain', 'US China trade', 'OPEC', 'Federal Reserve'])
 
-            query = " OR ".join(query_terms[:20])  # Limit to 20 terms for safety
+            query_terms = [
+                "geopolitical tension", "international crisis", "diplomatic relations",
+                "war", "conflict", "military action",
+                "trade disruption", "supply chain", "tariffs"
+            ]
+            
+            # Make the query string using OR, ensuring it stays under 100 chars
+            query = " OR ".join(query_terms[:5])
+            query = query.replace(" ", "+")
 
             params = {
                 'q': query,
@@ -45,7 +53,6 @@ class NewsAPI:
                 'from': from_date.strftime('%Y-%m-%d'),
                 'to': to_date.strftime('%Y-%m-%d')
             }
-
             logger.info(f"NewsData.io request: {self.base_url} with params: {params}")
             response = requests.get(self.base_url, params=params, timeout=10)
             response.raise_for_status()
