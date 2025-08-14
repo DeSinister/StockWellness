@@ -30,8 +30,8 @@ class NewsAPI:
                     "language": "en",
                     "size": 8,
                     "removeduplicate": 1,
-                    "from_date": from_date,
-                    "to_date": to_date,
+                    # "from_date": from_date,
+                    # "to_date": to_date,
                     "full_content": 1
             }
 
