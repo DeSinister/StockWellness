@@ -30,7 +30,8 @@ class NewsAPI:
                     "language": "en",
                     "size": 8,
                     "removeduplicate": 1,
-                    "timeframe": 48,       # past 48 hours
+                    "from_date": from_date,
+                    "to_date": to_date,
                     "full_content": 1
             }
 
