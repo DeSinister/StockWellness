@@ -42,9 +42,9 @@ class NewsAPI:
             data = response.json()
             logger.info(f"NewsData.io response status: {data.get('status')}, total results: {data.get('totalResults', 0)}")
 
-            if data['status'] != 'ok':
-                logger.error(f"News API returned error: {data.get('message', 'Unknown error')}")
-                return self._get_demo_global_news(topics)
+           if data.get('status') != 'success':  # NewsData.io returns "success"
+               logger.error(f"News API returned error: {data.get('message', 'Unknown error')}")
+               return self._get_demo_global_news(topics)
 
             raw_articles = data.get('results', [])
             logger.info(f"Raw articles found: {len(raw_articles)}")
