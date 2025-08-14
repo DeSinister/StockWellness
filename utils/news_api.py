@@ -24,35 +24,16 @@ class NewsAPI:
             # Calculate date range
             to_date = datetime.now()
             from_date = to_date - timedelta(days=days)
-
-            # Create comprehensive query for global affairs with specific terms
-            query_terms = []
-            for topic in topics:
-                if topic.lower() == 'global tension':
-                    query_terms.extend(['geopolitical tension', 'international crisis', 'diplomatic relations', 'sanctions', 'Iran', 'China', 'Russia', 'NATO'])
-                elif topic.lower() == 'wars':
-                    query_terms.extend(['war', 'conflict', 'military action', 'Ukraine', 'Middle East', 'oil supply', 'Strait of Hormuz'])
-                elif topic.lower() == 'trading co-operations':
-                    query_terms.extend(['trade agreement', 'tariffs', 'supply chain', 'US China trade', 'OPEC', 'Federal Reserve'])
-
-            query_terms = [
-                "geopolitical tension", "international crisis", "diplomatic relations",
-                "war", "conflict", "military action",
-                "trade disruption", "supply chain", "tariffs"
-            ]
-            
-            # Make the query string using OR, ensuring it stays under 100 chars
-            query = " OR ".join(query_terms[:5])
-            query = query.replace(" ", "+")
-
             params = {
-                'q': query,
-                'apikey': self.api_key,
-                'language': 'en',
-                'page_size': max_articles,
-                'from': from_date.strftime('%Y-%m-%d'),
-                'to': to_date.strftime('%Y-%m-%d')
+                    "apikey": self.api_key,
+                    "q": "geopolitical tension OR international crisis OR diplomatic relations OR war OR conflict",
+                    "language": "en",
+                    "size": 8,
+                    "removeduplicate": 1,
+                    "timeframe": 48,       # past 48 hours
+                    "full_content": 1
             }
+
             logger.info(f"NewsData.io request: {self.base_url} with params: {params}")
             response = requests.get(self.base_url, params=params, timeout=10)
             response.raise_for_status()
@@ -64,7 +45,7 @@ class NewsAPI:
                 logger.error(f"News API returned error: {data.get('message', 'Unknown error')}")
                 return self._get_demo_global_news(topics)
 
-            raw_articles = data.get('articles', [])
+            raw_articles = data.get('results', [])
             logger.info(f"Raw articles found: {len(raw_articles)}")
 
             articles = []
@@ -73,7 +54,7 @@ class NewsAPI:
 
                 # More lenient filtering - just check if title exists
                 if (article.get('title') and
-                    article.get('url') and
+                    article.get('link') and
                     '[Removed]' not in article.get('title', '')):
 
                     # Combine description and content for more detailed context
@@ -91,9 +72,9 @@ class NewsAPI:
                     articles.append({
                         'title': article['title'],
                         'description': full_details[:500] + '...' if len(full_details) > 500 else full_details,  # More detailed description
-                        'url': article['url'],
+                        'url': article['link'],
                         'source': article.get('source', {}).get('name', 'Unknown'),
-                        'published_at': article.get('publishedAt', ''),
+                        'published_at': article.get('pubDate', ''),
                         'content': content,
                         'author': article.get('author', 'Unknown')
                     })
