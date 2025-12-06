@@ -51,7 +51,7 @@ Return ONLY the key investment themes and patterns as a short summary suitable f
 """
             
             response = self.client.messages.create(
-                model="claude-3-5-sonnet-20241022",
+                model="claude-sonnet-4-5-20250929",
                 max_tokens=200,
                 temperature=0.3,
                 system="You are a financial analyst who identifies general investment themes from current events.",

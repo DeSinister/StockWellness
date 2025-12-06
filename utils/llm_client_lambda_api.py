@@ -142,7 +142,7 @@ Reference the investment principles above when relevant.
             
             # Get analysis from Claude
             message = self.client.messages.create(
-                model="claude-3-5-sonnet-20241022",
+                model="claude-sonnet-4-5-20250929",
                 max_tokens=2000,
                 temperature=0.3,
                 messages=[{"role": "user", "content": prompt}]
