@@ -8,72 +8,59 @@ logger = logging.getLogger(__name__)
 
 class NewsAPI:
     def __init__(self):
-        self.api_key = os.getenv('NEWS_API_KEY')
-        self.base_url = "https://newsapi.org/v2/everything"
-        
+        self.api_key = os.getenv('NEW_NEWS_API_KEY')  # Ensure this environment variable is set
+        self.base_url = "https://newsdata.io/api/1/news"
+
         if not self.api_key:
             logger.warning("NEWS_API_KEY not found in environment variables")
-    
+
     def get_global_affairs_news(self, topics=['Global Tension', 'Wars', 'Trading co-operations'], days=7, max_articles=15):
         """Fetch news about global affairs that could affect markets"""
         if not self.api_key:
             logger.error("News API key not configured")
             return self._get_demo_global_news(topics)
-        
+
         try:
             # Calculate date range
             to_date = datetime.now()
             from_date = to_date - timedelta(days=days)
-            
-            # Create comprehensive query for global affairs with specific terms
-            query_terms = []
-            for topic in topics:
-                if topic.lower() == 'global tension':
-                    query_terms.extend(['geopolitical tension', 'international crisis', 'diplomatic relations', 'sanctions', 'Iran', 'China', 'Russia', 'NATO'])
-                elif topic.lower() == 'wars':
-                    query_terms.extend(['war', 'conflict', 'military action', 'Ukraine', 'Middle East', 'oil supply', 'Strait of Hormuz'])
-                elif topic.lower() == 'trading co-operations':
-                    query_terms.extend(['trade agreement', 'tariffs', 'supply chain', 'US China trade', 'OPEC', 'Federal Reserve'])
-            
-            query = ' OR '.join(query_terms[:12])  # Include more specific terms
-            
             params = {
-                'q': query,
-                'apiKey': self.api_key,
-                'sortBy': 'publishedAt',
-                'language': 'en',
-                'pageSize': max_articles,
-                'from': from_date.strftime('%Y-%m-%d'),
-                'to': to_date.strftime('%Y-%m-%d')
+                    "apikey": self.api_key,
+                    "q": "geopolitical tension OR international crisis OR diplomatic relations OR war OR conflict",
+                    "language": "en",
+                    "size": 8,
+                    "removeduplicate": 1,
+                    # "from_date": from_date,
+                    # "to_date": to_date,
+                    # "full_content": 1
             }
-            
-            logger.info(f"NewsAPI request: {self.base_url} with params: {params}")
+
+            logger.info(f"NewsData.io request: {self.base_url} with params: {params}")
             response = requests.get(self.base_url, params=params, timeout=10)
             response.raise_for_status()
-            
+
             data = response.json()
-            logger.info(f"NewsAPI response status: {data.get('status')}, total results: {data.get('totalResults', 0)}")
-            
-            if data['status'] != 'ok':
-                logger.error(f"News API returned error: {data.get('message', 'Unknown error')}")
-                return self._get_demo_global_news(topics)
-            
-            raw_articles = data.get('articles', [])
+            logger.info(f"NewsData.io response status: {data.get('status')}, total results: {data.get('totalResults', 0)}")
+            if data.get('status') != 'success':  # NewsData.io returns "success"
+               logger.error(f"News API returned error: {data.get('message', 'Unknown error')}")
+               return self._get_demo_global_news(topics)
+
+            raw_articles = data.get('results', [])
             logger.info(f"Raw articles found: {len(raw_articles)}")
-            
+
             articles = []
             for i, article in enumerate(raw_articles):
                 logger.debug(f"Article {i}: title='{article.get('title', '')[:50]}...', has_desc={bool(article.get('description'))}")
-                
+
                 # More lenient filtering - just check if title exists
-                if (article.get('title') and 
-                    article.get('url') and
+                if (article.get('title') and
+                    article.get('link') and
                     '[Removed]' not in article.get('title', '')):
-                    
+
                     # Combine description and content for more detailed context
                     description = article.get('description', 'No description available')
                     content = article.get('content', '')
-                    
+
                     # Create comprehensive details from both description and content
                     full_details = description
                     if content and content != description:
@@ -81,28 +68,29 @@ class NewsAPI:
                         content_clean = content.split('[+')[0].strip()
                         if content_clean and len(content_clean) > len(description):
                             full_details = f"{description} {content_clean}"
-                    
+
                     articles.append({
                         'title': article['title'],
                         'description': full_details[:500] + '...' if len(full_details) > 500 else full_details,  # More detailed description
-                        'url': article['url'],
+                        'url': article['link'],
                         'source': article.get('source', {}).get('name', 'Unknown'),
-                        'published_at': article.get('publishedAt', ''),
+                        'published_at': article.get('pubDate', ''),
                         'content': content,
                         'author': article.get('author', 'Unknown')
                     })
                 else:
                     logger.debug(f"Filtered out article: {article.get('title', 'No title')}")
-            
+
             logger.info(f"Successfully fetched {len(articles)} global affairs articles (filtered from {len(raw_articles)})")
             return articles
-            
+
         except requests.exceptions.RequestException as e:
             logger.error(f"Network error fetching global affairs news: {str(e)}")
             return self._get_demo_global_news(topics)
         except Exception as e:
             logger.error(f"Error fetching global affairs news: {str(e)}")
             return self._get_demo_global_news(topics)
+
     
     def format_news_for_llm(self, articles):
         """Format news articles for LLM context"""

@@ -90,13 +90,6 @@ def analyze_stock():
         if not price_data:
             return jsonify({'error': f'Failed to fetch price data for {ticker}'}), 500
         
-        # Note: News and RAG analysis now handled internally by LLM client
-        # The enhanced RAG system will:
-        # 1. Get global affairs news automatically
-        # 2. Generate investment themes from current events  
-        # 3. Search books for relevant investment principles
-        # 4. Use both global context + book wisdom in analysis
-        
         # Create price chart
         logger.info(f"About to create price chart for {company_data['name']}")
         price_chart = create_price_chart(price_data, company_data['name'])

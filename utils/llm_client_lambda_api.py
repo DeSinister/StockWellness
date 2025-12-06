@@ -112,34 +112,37 @@ class LambdaAPILLMClient:
             company_name = company_data.get('name', 'Unknown Company')
             ticker = company_data.get('symbol', 'UNKNOWN')
             current_price = company_data.get('current_price', 'N/A')
-            
             prompt = f"""
-You are a professional stock analyst. Analyze {company_name} ({ticker}) and provide a recommendation.
-
-RELEVANT INVESTMENT PRINCIPLES:
-{book_context}
-
-COMPANY FUNDAMENTALS:
-- Name: {company_name}
-- Ticker: {ticker}
-- Current Price: ${current_price}
-- Market Cap: ${company_data.get('market_cap', 'N/A')}
-- P/E Ratio: {company_data.get('pe_ratio', 'N/A')}
-- Sector: {company_data.get('sector', 'N/A')}
-
-Please provide your analysis in JSON format:
-{{
-    "recommendation": "BUY|HOLD|SELL",
-    "confidence_score": <number between 0-100>,
-    "rationale": "<detailed explanation>",
-    "key_factors": ["<factor 1>", "<factor 2>"],
-    "risks": ["<risk 1>", "<risk 2>"],
-    "price_target": "<12-month target or N/A>"
-}}
-
-Reference the investment principles above when relevant.
-"""
-            
+                You are a professional stock analyst. Analyze the company below and provide a recommendation in JSON format.
+                
+                COMPANY:
+                - Name/Ticker: {company_name} ({ticker})
+                - Current Price: ${current_price}
+                - Market Cap: ${company_data.get('market_cap', 'N/A')}
+                - P/E Ratio: {company_data.get('pe_ratio', 'N/A')}
+                - Sector: {company_data.get('sector', 'N/A')}
+                
+                CONTEXT:
+                - Recent News Summary: {investment_themes}
+                - Relevant Investment Principles: {book_context}
+                
+                INSTRUCTIONS:
+                - Provide a concise BUY, HOLD, or SELL recommendation.
+                - Include a confidence score (0-100).
+                - Explain your rationale based on fundamentals, recent news, and investment principles.
+                - List key success factors and risks.
+                - Provide a 12-month price target or "N/A" if uncertain.
+                - Return strictly in JSON format as below:
+                
+                {{
+                    "recommendation": "BUY|HOLD|SELL",
+                    "confidence_score": <number between 0-100>,
+                    "rationale": "<detailed explanation>",
+                    "key_factors": ["<factor 1>", "<factor 2>"],
+                    "risks": ["<risk 1>", "<risk 2>"],
+                    "price_target": "<12-month target or N/A>"
+                }}
+            """
             # Get analysis from Claude
             message = self.client.messages.create(
                 model="claude-sonnet-4-5-20250929",
